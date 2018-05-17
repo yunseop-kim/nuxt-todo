@@ -13,12 +13,12 @@
           <b-row>
             <b-col>
               <b-form-input v-if="editIndex === todo.idx" v-model="editContext"></b-form-input>
-              <span v-else>{{todo.content}}</span>
+              <span v-else :class="{'done-line': todo.isFinished}">{{todo.content}}</span>
             </b-col>
             <b-button-group>
+              <b-button :variant=" todo.isFinished ? 'primary' : 'outline-primary'" :size="'sm'" @click="checkTodo(todo.idx)">✔️</b-button>
               <b-button :variant="'outline-warning'" :size="'sm'" @click="edit(todo.idx, todo.content)">✏️</b-button>
               <b-button :variant="'outline-danger'" :size="'sm'" @click="remove(todo.idx)">❌</b-button>
-              <b-button :variant=" todo.isFinished ? 'primary' : 'outline-primary'" :size="'sm'" @click="checkTodo(todo.idx)">✔️</b-button>
             </b-button-group>
           </b-row>
         </b-list-group-item>
@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     add(e) {
-      if(this.context == "") return;
+      if (this.context == "") return;
       const idx = this.todoList.slice(-1)[0];
       this.todoList.push({
         idx,
@@ -94,4 +94,7 @@ export default {
 </script>
 
 <style>
+.done-line {
+  text-decoration: line-through;
+}
 </style>
