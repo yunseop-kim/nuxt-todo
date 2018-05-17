@@ -1,5 +1,6 @@
 export const state = () => ({
-  list: []
+  list: [],
+  test: null
 })
 
 export const mutations = {
@@ -14,5 +15,8 @@ export const mutations = {
   },
   toggle (state, todo) {
     todo.done = !todo.done
+  },
+  setTest (state, data) {
+    state.test = data
   }
 }
