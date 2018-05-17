@@ -1,4 +1,4 @@
-# yunseop-blog
+# yunseop-todo
 
 > My smashing Nuxt.js project
 
