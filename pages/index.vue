@@ -59,7 +59,7 @@ export default {
       this.selected = -1
     },
     remove(todo) {
-      this.$store.commit('todos/remove', todo)
+      this.$store.dispatch('todos/remove', todo)
     },
     ...mapMutations({
       toggle: 'todos/toggle'
