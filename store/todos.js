@@ -25,6 +25,14 @@ export const actions = {
     if (res.status === 204) {
       context.dispatch('getList');
     }
+  },
+  async edit(context, todo) {
+    const res = await axios.put(`http://localhost:3000/api/todos/${todo.id}`, {
+      ...todo
+    });
+    if (res.status === 200) {
+      context.dispatch('getList');
+    }
   }
 }
 
