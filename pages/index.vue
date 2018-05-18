@@ -33,16 +33,15 @@ export default {
       editText: ""
     }
   },
+  mounted() {
+    this.$store.dispatch('todos/getList');
+  },
   computed: {
     todos () { return this.$store.state.todos.list }
   },
-  async fetch({ store, params }) {
-    let { data } = await axios.get('http://localhost:3000/api/todos')
-    store.commit('todos/setList', data.todos);
-  },
   methods: {
     addTodo (e) {
-      this.$store.commit('todos/add', e.target.value)
+      this.$store.dispatch('todos/add', e.target.value);
       e.target.value = ''
     },
     focus(index, todo) {

@@ -1,6 +1,26 @@
+import axios from 'axios';
+
 export const state = () => ({
   list: []
 })
+
+export const actions = {
+  async getList(context) {
+    const {
+      data
+    } = await axios.get('http://localhost:3000/api/todos')
+    context.commit('setList', data.todos);
+  },
+  async add(context, text) {
+    console.log("add", text)
+    const res = await axios.post('http://localhost:3000/api/todos', {
+      text
+    });
+    if (res.status === 201) {
+      context.dispatch('getList');
+    }
+  }
+}
 
 export const mutations = {
   add(state, text) {
