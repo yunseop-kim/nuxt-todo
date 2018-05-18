@@ -33,6 +33,15 @@ export const actions = {
     if (res.status === 200) {
       context.dispatch('getList');
     }
+  },
+  async toggle(context, todo) {
+    const res = await axios.put(`http://localhost:3000/api/todos/${todo.id}`, {
+      text: todo.text,
+      done: !todo.done
+    });
+    if (res.status === 200) {
+      context.dispatch('getList');
+    }
   }
 }
 

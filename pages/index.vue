@@ -65,9 +65,12 @@ export default {
     remove(todo) {
       this.$store.dispatch('todos/remove', todo)
     },
-    ...mapMutations({
-      toggle: 'todos/toggle'
-    })
+    toggle(todo) {
+      this.$store.dispatch('todos/toggle', todo)
+    }
+    // ...mapMutations({
+    //   toggle: 'todos/toggle'
+    // })
   }
 }
 </script>
