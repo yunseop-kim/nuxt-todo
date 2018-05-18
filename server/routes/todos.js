@@ -28,7 +28,7 @@ router.delete('/:id', function (req, res) {
       id: req.params.id
     }
   }).then(function () {
-    res.redirect('/');
+    res.status(204).send();
   });
 });
 

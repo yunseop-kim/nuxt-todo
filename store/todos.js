@@ -19,6 +19,12 @@ export const actions = {
     if (res.status === 201) {
       context.dispatch('getList');
     }
+  },
+  async remove(context, todo) {
+    const res = await axios.delete(`http://localhost:3000/api/todos/${todo.id}`);
+    if (res.status === 204) {
+      context.dispatch('getList');
+    }
   }
 }
 
