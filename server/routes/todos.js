@@ -13,10 +13,13 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
   models.Todo.create({
-    text: req.body.text
-  }).then(function () {
-    res.redirect('/');
-  });
+    text: req.body.text,
+    done: false
+  }).then(() => {
+    res.status(201).json({
+      message: "Successfully Created."
+    });
+  })
 });
 
 router.delete('/:id', function (req, res) {
