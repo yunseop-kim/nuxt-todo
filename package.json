@@ -17,7 +17,10 @@
     "bootstrap": "^4.0.0-beta.2",
     "bootstrap-vue": "^1.0.2",
     "express": "^4.15.3",
+    "mysql2": "^1.5.3",
     "nuxt": "^1.0.0",
+    "sequelize": "^4.37.7",
+    "sequelize-cli": "^4.0.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
