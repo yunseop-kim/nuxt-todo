@@ -55,7 +55,11 @@ export default {
       this.selected = -1;
     },
     doneEdit(todo) {
-      this.$store.commit('todos/edit', {todo, editText: this.editText})
+      this.$store.dispatch('todos/edit', {
+        id: todo.id,
+        text: this.editText,
+        done: todo.done
+      })
       this.selected = -1
     },
     remove(todo) {
