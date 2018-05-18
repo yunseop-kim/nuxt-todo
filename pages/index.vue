@@ -17,6 +17,7 @@
           :class="{ done: todo.done }"
           @click.prevent="focus(index, todo)">{{ todo.text }}</span>
         <button @click="remove(todo)">delete</button>
+        <nuxt-link :to="`/${todo.id}`" tag="button">detail</nuxt-link>
       </li>
       <li><input placeholder="What needs to be done?" @keyup.enter="addTodo"></li>
     </ul>
@@ -67,10 +68,10 @@ export default {
     },
     toggle(todo) {
       this.$store.dispatch('todos/toggle', todo)
+    },
+    detail(todo) {
+      console.log('detail');
     }
-    // ...mapMutations({
-    //   toggle: 'todos/toggle'
-    // })
   }
 }
 </script>
