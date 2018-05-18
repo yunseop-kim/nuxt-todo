@@ -22,6 +22,21 @@ router.post('/', function (req, res) {
   })
 });
 
+router.put('/:id', function (req, res) {
+  models.Todo.update({
+    text: req.body.text,
+    done: req.body.done
+  }, {
+    where: {
+      id: req.params.id
+    }
+  }).then(() => {
+    res.status(200).json({
+      message: "Successfully Created."
+    });
+  })
+});
+
 router.delete('/:id', function (req, res) {
   models.Todo.destroy({
     where: {
