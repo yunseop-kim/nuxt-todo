@@ -5,13 +5,17 @@
       <li v-for="(todo, index) in todos" :key="todo.text">
         <input type="checkbox" :checked="todo.done" @change="toggle(todo)">
         <input
+          :id="`edit-text-${index}`"
           type="text"
-          v-if="selected === index"
+          v-show="selected === index"
           v-model="editText"
           @keyup.enter="doneEdit(todo)"
           @blur="doneEdit(todo)"
           @keyup.esc="cancelEdit(todo)">
-        <span v-else :class="{ done: todo.done }" @click="focus(index, todo)">{{ todo.text }}</span>
+        <span
+          v-show="selected !== index"
+          :class="{ done: todo.done }"
+          @click.prevent="focus(index, todo)">{{ todo.text }}</span>
         <button @click="remove(todo)">delete</button>
       </li>
       <li><input placeholder="What needs to be done?" @keyup.enter="addTodo"></li>
@@ -42,9 +46,11 @@ export default {
       e.target.value = ''
     },
     focus(index, todo) {
-      console.log("focus");
       this.selected = index;
       this.editText = todo.text;
+      this.$nextTick(() => {
+        document.getElementById(`edit-text-${this.selected}`).focus();
+      });
     },
     cancelEdit(todo) {
       this.selected = -1;
