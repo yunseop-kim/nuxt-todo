@@ -4,9 +4,9 @@
     <ul>
       <li v-for="(todo, index) in todos" :key="todo.text">
         <input type="checkbox" :checked="todo.done" @change="toggle(todo)">
-        <input v-if="selected === index" type="text" v-model="editText" @keyup.enter="edit">
-        <span v-else :class="{ done: todo.done }" @click="selectToEdit(index, todo)">{{ todo.text }}</span>
-        <button>delete</button>
+        <input v-if="selected === index" type="text" v-model="editText" @keyup.enter="edit(todo)">
+        <span v-else :class="{ done: todo.done }" @click="focus(index, todo)">{{ todo.text }}</span>
+        <button @click="remove(todo)">delete</button>
       </li>
       <li><input placeholder="What needs to be done?" @keyup.enter="addTodo"></li>
     </ul>
@@ -35,14 +35,19 @@ export default {
       this.$store.commit('todos/add', e.target.value)
       e.target.value = ''
     },
-    selectToEdit(index, todo) {
-      console.log("selectToEdit");
+    focus(index, todo) {
+      console.log("focus");
       this.selected = index;
       this.editText = todo.text;
     },
-    edit(e) {
-      // this.$store.commit('todos/edit', e.target.value)
+    // doneEdit, cancelEdit, @blur="doneEdit(todo)"
+    edit(todo) {
+      // todo.text = this.editText
+      this.$store.commit('todos/edit', {todo, editText: this.editText})
       this.selected = -1
+    },
+    remove(todo) {
+      this.$store.commit('todos/remove', todo)
     },
     ...mapMutations({
       toggle: 'todos/toggle'
