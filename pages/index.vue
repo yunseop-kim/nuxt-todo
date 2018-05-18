@@ -37,8 +37,8 @@ export default {
     todos () { return this.$store.state.todos.list }
   },
   async fetch({ store, params }) {
-    let { data } = await axios.get('http://localhost:3000/api/todo')
-    store.commit('todos/setTest', data);
+    let { data } = await axios.get('http://localhost:3000/api/todos')
+    store.commit('todos/setList', data.todos);
   },
   methods: {
     addTodo (e) {
