@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 export const state = () => ({
-  list: []
+  list: [],
+  todo: {}
 })
 
 export const actions = {
@@ -73,5 +74,8 @@ export const mutations = {
   },
   setList(state, data) {
     state.list = data
+  },
+  setTodo(state, data) {
+    state.todo = data
   }
 }
