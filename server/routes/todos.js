@@ -11,6 +11,18 @@ router.get('/', function (req, res) {
   });
 });
 
+router.get('/:id', function (req, res) {
+  models.Todo.findAll({
+    where: {
+      id: req.params.id
+    }
+  }).then(function (todo) {
+    res.status(200).json({
+      todo: todo[0]
+    });
+  });
+});
+
 router.post('/', function (req, res) {
   models.Todo.create({
     text: req.body.text,
