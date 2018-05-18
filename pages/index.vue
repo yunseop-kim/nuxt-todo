@@ -4,7 +4,13 @@
     <ul>
       <li v-for="(todo, index) in todos" :key="todo.text">
         <input type="checkbox" :checked="todo.done" @change="toggle(todo)">
-        <input v-if="selected === index" type="text" v-model="editText" @keyup.enter="edit(todo)">
+        <input
+          type="text"
+          v-if="selected === index"
+          v-model="editText"
+          @keyup.enter="doneEdit(todo)"
+          @blur="doneEdit(todo)"
+          @keyup.esc="cancelEdit(todo)">
         <span v-else :class="{ done: todo.done }" @click="focus(index, todo)">{{ todo.text }}</span>
         <button @click="remove(todo)">delete</button>
       </li>
@@ -40,9 +46,10 @@ export default {
       this.selected = index;
       this.editText = todo.text;
     },
-    // doneEdit, cancelEdit, @blur="doneEdit(todo)"
-    edit(todo) {
-      // todo.text = this.editText
+    cancelEdit(todo) {
+      this.selected = -1;
+    },
+    doneEdit(todo) {
       this.$store.commit('todos/edit', {todo, editText: this.editText})
       this.selected = -1
     },
