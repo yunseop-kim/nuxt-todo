@@ -2,7 +2,7 @@
   <div>
     <h4>{{$store.state.todos.test}}</h4>
     <ul>
-      <li v-for="(todo, index) in todos" :key="todo.text">
+      <li v-for="(todo, index) in todos" :key="todo.id">
         <input type="checkbox" :checked="todo.done" @change="toggle(todo)">
         <input
           :id="`edit-text-${index}`"
